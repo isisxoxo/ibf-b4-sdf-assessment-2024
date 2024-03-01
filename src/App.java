@@ -63,7 +63,7 @@ public class App {
                 String pokemons = console.readLine("Create a new Pokemon stack and save to a new file >\n");
                 String fullPathFilename3 = console.readLine("Enter filename to save (e.g. path/filename.csv) >\n");
                 while (!fullPathFilename3.endsWith(".csv")) {
-                    System.out.println("Invalid file name. Please provide a file with .csv extension.");
+                    System.out.println("Invalid file name. Please provide a file name with .csv extension.");
                     fullPathFilename3 = console.readLine("Enter filename to save (e.g. path/filename.csv) >\n");
                 }
                 savePokemonStack(pokemons, fullPathFilename3);
@@ -74,7 +74,9 @@ public class App {
                 printPokemonCardCount();
 
             } else {
+
                 System.out.println("Choose a valid option from the menu.");
+
             }
             pressAnyKeyToContinue();
         }
@@ -100,6 +102,7 @@ public class App {
     public static void savePokemonStack(String pokemonStack, String filename) throws IOException {
         FileService fileService = new FileService();
         fileService.writeAsCSV(pokemonStack, filename);
+        System.out.println("Stack saved to file");
     }
 
     // Task 2 - Press any key to continue
