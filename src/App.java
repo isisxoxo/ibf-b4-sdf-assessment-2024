@@ -70,9 +70,11 @@ public class App {
 
             } else if (input.equals("4")) {
 
-                System.out.println("Top 10 pokemon across all stacks: ");
+                System.out.println("Top 10 Pokemon across all stacks: ");
                 printPokemonCardCount();
 
+            } else {
+                System.out.println("Choose a valid option from the menu.");
             }
             pressAnyKeyToContinue();
         }
@@ -96,17 +98,12 @@ public class App {
         System.out.println("\nThank you for using the program...\nHope to see you soon...");
     }
 
-    // Task 1
-    public static void savePokemonStack(String pokemonStack, String filename) {
-        // Task 1 - your code here
-    }
-
     // Task 2 - Press any key to continue
     public static void pressAnyKeyToContinue() {
         console.readLine("Press any key to continue...");
     }
 
-    // Task 2
+    // Task 2 - Option 1
     public static void printUniquePokemonStack(Integer stack) {
         // Task 2 - Print unique pokemon from selected stack
 
@@ -123,7 +120,7 @@ public class App {
 
     }
 
-    // Task 2
+    // Task 2 - Option 2
     public static void printNext5StarsPokemon(String enteredPokemon) {
 
         for (Map.Entry<Integer, List<String>> entry : pokemonMap.entrySet()) {
@@ -157,7 +154,7 @@ public class App {
         }
     }
 
-    // Task 2
+    // Task 2 - Option 4
     public static void printPokemonCardCount() {
         // Task 2 - Top 10 Pokemon across all stacks from CSV file
         List<String> allStacksPokemon = new LinkedList<>();
