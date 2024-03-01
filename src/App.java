@@ -19,13 +19,13 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        String fullPathFilename = args[0]; // Rush2.csv file name
+        String fullPathFilename = args[0]; // Eg. Rush2.csv file name
         FileService fs = new FileService();
-        pokemonList = fs.ReadCSV(fullPathFilename); // Read Rush2.csv file as ArrayList
+        pokemonList = fs.ReadCSV(fullPathFilename); // Eg. Read Rush2.csv file as ArrayList
 
         for (int i = 0; i < pokemonList.size(); i++) {
             pokemonMap.put(i + 1, Arrays.asList(pokemonList.get(i).split(",")));
-        }
+        } // Eg. Save Rush2.csv ArrayList as HashMap
 
         while (true) {
             clearConsole();
@@ -40,16 +40,14 @@ public class App {
 
             } else if (input.equals("1")) {
 
-                boolean isInvalidStack = false;
-                while (!isInvalidStack) {
-                    try {
-                        Integer stack = Integer.parseInt(
-                                console.readLine("Display the list of unique Pokemon in stack (1 - 8) >\n"));
-                        printUniquePokemonStack(stack);
-                        isInvalidStack = true;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid stack. Please input a correct number instead.");
-                    }
+                try {
+                    Integer stack = Integer.parseInt(
+                            console.readLine("Display the list of unique Pokemon in stack (1 - 8) >\n"));
+                    printUniquePokemonStack(stack);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid stack number.");
+                } catch (NullPointerException e) {
+                    System.out.println("No such stack in the file.");
                 }
 
             } else if (input.equals("2")) {
