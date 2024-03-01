@@ -15,6 +15,7 @@ public class App {
 
     static List<String> pokemonList = new ArrayList<>();
     static Map<Integer, List<String>> pokemonMap = new HashMap<>();
+    static Console console = System.console();
 
     public static void main(String[] args) throws Exception {
 
@@ -26,15 +27,10 @@ public class App {
             pokemonMap.put(i + 1, Arrays.asList(pokemonList.get(i).split(",")));
         }
 
-        // for (Map.Entry<Integer, List<String>> entry : pokemonMap.entrySet()) {
-        // System.out.println(entry.getKey() + " ==> " + entry.getValue()); // TO REMOVE
-        // }
-
         while (true) {
             clearConsole();
             printHeader(); // Start with menu
 
-            Console console = System.console();
             String input = console.readLine("Enter your selection >");
 
             if (input.equals("q")) {
@@ -55,17 +51,12 @@ public class App {
                         System.out.println("Invalid stack. Please input a correct number instead.");
                     }
                 }
-                console.readLine("Press any key to continue...");
-                continue;
 
             } else if (input.equals("2")) {
 
                 String enteredPokemon = console.readLine(
                         "Search for the next occurrence of 5 stars Pokemon in all stacks based on entered Pokemon > \n");
                 printNext5StarsPokemon(enteredPokemon);
-
-                console.readLine("Press any key to continue...");
-                continue;
 
             } else if (input.equals("3")) {
 
@@ -77,18 +68,13 @@ public class App {
                 }
                 fs.writeAsCSV(pokemons, fullPathFilename3);
 
-                console.readLine("Press any key to continue...");
-                continue;
-
             } else if (input.equals("4")) {
 
                 System.out.println("Top 10 pokemon across all stacks: ");
                 printPokemonCardCount();
 
-                console.readLine("Press any key to continue...");
-                continue;
             }
-
+            pressAnyKeyToContinue();
         }
     }
 
@@ -105,7 +91,7 @@ public class App {
 
     }
 
-    // Task 1
+    // Task 1 - Exit message (input = q)
     public static void printExitMessage() {
         System.out.println("\nThank you for using the program...\nHope to see you soon...");
     }
@@ -115,9 +101,9 @@ public class App {
         // Task 1 - your code here
     }
 
-    // Task 2
+    // Task 2 - Press any key to continue
     public static void pressAnyKeyToContinue() {
-        // Task 2 - your code here
+        console.readLine("Press any key to continue...");
     }
 
     // Task 2
