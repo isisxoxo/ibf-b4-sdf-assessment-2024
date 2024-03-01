@@ -10,7 +10,7 @@ import java.util.List;
 public class FileService {
 
     public List<String> ReadCSV(String fullPathFilename) throws IOException {
-        // Task 1 - Read Rush2.csv
+        // Task 1 - Read CSV file (Option 3)
         FileReader fr = new FileReader(fullPathFilename);
         BufferedReader br = new BufferedReader(fr);
 
@@ -31,7 +31,7 @@ public class FileService {
     }
 
     public void writeAsCSV(String pokemons, String fullPathFilename) throws IOException {
-        // Task 1 - Write to CSV file
+        // Task 1 - Write to CSV file (Option 3)
 
         File inputFile = new File(fullPathFilename);
         FileWriter fw = null;

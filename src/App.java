@@ -66,7 +66,7 @@ public class App {
                     System.out.println("Invalid file name. Please provide a file with .csv extension.");
                     fullPathFilename3 = console.readLine("Enter filename to save (e.g. path/filename.csv) >\n");
                 }
-                fs.writeAsCSV(pokemons, fullPathFilename3);
+                savePokemonStack(pokemons, fullPathFilename3);
 
             } else if (input.equals("4")) {
 
@@ -87,15 +87,19 @@ public class App {
 
     // Task 1 - Menu
     public static void printHeader() {
-
         System.out.println(
                 "Welcome to Pokemon Gaole Legend 4 Rush 2\n\n(1) View unique list of Pokemon in the selected stack\n(2) Find next 5 stars Pokemon occurrence\n(3) Create new Pokemon stack and save (append) to csv file\n(4) Print distinct Pokemon and cards count\n(q) to exit the program");
-
     }
 
     // Task 1 - Exit message (input = q)
     public static void printExitMessage() {
         System.out.println("\nThank you for using the program...\nHope to see you soon...");
+    }
+
+    // Task 1 - FileService
+    public static void savePokemonStack(String pokemonStack, String filename) throws IOException {
+        FileService fileService = new FileService();
+        fileService.writeAsCSV(pokemonStack, filename);
     }
 
     // Task 2 - Press any key to continue
