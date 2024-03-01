@@ -3,8 +3,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class App {
@@ -27,9 +31,8 @@ public class App {
         // }
 
         while (true) {
-
-            System.out.println(
-                    "Welcome to Pokemon Gaole Legend 4 Rush 2\n\n(1) View unique list of Pokemon in the selected stack\n(2) Find next 5 stars Pokemon occurrence\n(3) Create new Pokemon stack and save (append) to csv file\n(4) Print distinct Pokemon and cards count\n(q) to exit the program");
+            clearConsole();
+            printHeader(); // Start with menu
 
             Console console = System.console();
             String input = console.readLine("Enter your selection >");
@@ -41,10 +44,17 @@ public class App {
 
             } else if (input.equals("1")) {
 
-                Integer stack = Integer.parseInt(
-                        console.readLine("Display the list of unique Pokemon in stack (1 - 8) >\n"));
-                printUniquePokemonStack(stack);
-
+                boolean isInvalidStack = false;
+                while (!isInvalidStack) {
+                    try {
+                        Integer stack = Integer.parseInt(
+                                console.readLine("Display the list of unique Pokemon in stack (1 - 8) >\n"));
+                        printUniquePokemonStack(stack);
+                        isInvalidStack = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid stack. Please input a correct number instead.");
+                    }
+                }
                 console.readLine("Press any key to continue...");
                 continue;
 
@@ -72,6 +82,11 @@ public class App {
 
             } else if (input.equals("4")) {
 
+                System.out.println("Top 10 pokemon across all stacks: ");
+                printPokemonCardCount();
+
+                console.readLine("Press any key to continue...");
+                continue;
             }
 
         }
@@ -82,9 +97,12 @@ public class App {
         System.out.flush();
     }
 
-    // Task 1
+    // Task 1 - Menu
     public static void printHeader() {
-        // Task 1 - your code here
+
+        System.out.println(
+                "Welcome to Pokemon Gaole Legend 4 Rush 2\n\n(1) View unique list of Pokemon in the selected stack\n(2) Find next 5 stars Pokemon occurrence\n(3) Create new Pokemon stack and save (append) to csv file\n(4) Print distinct Pokemon and cards count\n(q) to exit the program");
+
     }
 
     // Task 1
@@ -110,7 +128,6 @@ public class App {
             List<String> pokemonsFromStack = pokemonMap.get(stack);
             List<String> pokemonsFromStackUnique = pokemonsFromStack.stream().distinct()
                     .collect(Collectors.toList());
-            System.out.println(pokemonsFromStackUnique); // TO REMOVE
             for (int i = 0; i < pokemonsFromStackUnique.size(); i++) {
                 System.out.println(i + 1 + " ==> " + pokemonsFromStackUnique.get(i));
             }
@@ -156,7 +173,43 @@ public class App {
 
     // Task 2
     public static void printPokemonCardCount() {
-        // Task 2 - your code here
+        // Task 2 - Top 10 Pokemon across all stacks from CSV file
+        List<String> allStacksPokemon = new LinkedList<>();
+        Map<String, Integer> pokemonCountMap = new HashMap<>();
+
+        Set<String> pokemonSet = new HashSet<>(pokemonList); // Get unique list of pokemon stack from csv
+
+        // for (String line : pokemonList) {
+        for (String line : pokemonSet) {
+            String[] oneStack = line.split(",");
+            // Set<String> oneStackSet = new HashSet<>(Arrays.asList(oneStack));
+
+            // for (String string : oneStackSet) {
+            for (String string : oneStack) {
+                allStacksPokemon.add(string);
+            }
+        }
+
+        for (String pokemon : allStacksPokemon) {
+            if (pokemonCountMap.containsKey(pokemon)) {
+                pokemonCountMap.put(pokemon, pokemonCountMap.get(pokemon) + 1);
+            } else {
+                pokemonCountMap.put(pokemon, 1);
+            }
+        }
+
+        pokemonCountMap = pokemonCountMap.entrySet().stream()
+                .sorted((k1, k2) -> k2.getValue().compareTo(k1.getValue()))
+                .limit(10)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new));
+
+        int index = 1;
+        for (Map.Entry<String, Integer> entry : pokemonCountMap.entrySet()) {
+            System.out.println("Pokemon " + index++ + " : " + entry.getKey() + ", Cards Count: " + entry.getValue());
+
+        }
+
     }
 
 }
