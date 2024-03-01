@@ -201,15 +201,14 @@ public class App {
         pokemonCountMap = pokemonCountMap.entrySet().stream()
                 .sorted((k1, k2) -> k2.getValue().compareTo(k1.getValue()))
                 .limit(10)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (e1, e2) -> e1, LinkedHashMap::new));
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey, // keyMapper
+                        Map.Entry::getValue, // valueMapper
+                        (e1, e2) -> e1, LinkedHashMap::new)); // mapSupplier to store in LinkedHashMap
 
         int index = 1;
         for (Map.Entry<String, Integer> entry : pokemonCountMap.entrySet()) {
             System.out.println("Pokemon " + index++ + " : " + entry.getKey() + ", Cards Count: " + entry.getValue());
-
         }
-
     }
-
 }
