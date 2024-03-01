@@ -141,7 +141,7 @@ public class App {
                         // If pokemon found in stack and got subsequent 5 star
                         int numCardsToGo = i - allPokemon.indexOf(enteredPokemon);
                         if (numCardsToGo > 0) {
-                            System.out.println(currentPokemon + " found. " + numCardsToGo + " cards to go.");
+                            System.out.println(currentPokemon + " found >>> " + numCardsToGo + " cards to go.");
                             break;
                         }
                     } else {
