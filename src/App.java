@@ -141,11 +141,13 @@ public class App {
                         // If pokemon found in stack and got subsequent 5 star
                         int numCardsToGo = i - allPokemon.indexOf(enteredPokemon);
                         if (numCardsToGo > 0) {
+                            // Only count subsequent 5* Pokemon in
                             System.out.println(currentPokemon + " found >>> " + numCardsToGo + " cards to go.");
                             break;
                         }
                     } else {
                         if (i == (allPokemon.size() - 1)) {
+                            // Last pokemon of stack
                             System.out.println("No 5 stars Pokemon found subsequently in the stack.");
                         }
                     }
