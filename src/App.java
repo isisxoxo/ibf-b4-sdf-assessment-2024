@@ -137,8 +137,7 @@ public class App {
                 for (int i = 0; i < allPokemon.size(); i++) {
                     String currentPokemon = allPokemon.get(i);
                     if (currentPokemon.startsWith("5*")) {
-                        // If pokemon found in stack and got subsequent 5 star - print pokemon then
-                        // number of cards to 5 star
+                        // If pokemon found in stack and got subsequent 5 star
                         int numCardsToGo = i - allPokemon.indexOf(enteredPokemon);
                         if (numCardsToGo > 0) {
                             System.out.println(currentPokemon + " found. " + numCardsToGo + " cards to go.");
@@ -151,7 +150,7 @@ public class App {
                     }
                 }
             } else {
-                // If pokemon not found in stack - not found
+                // If pokemon not found in stack
                 System.out.println(enteredPokemon + " not found in this set.");
             }
 
@@ -166,12 +165,9 @@ public class App {
 
         Set<String> pokemonSet = new HashSet<>(pokemonList); // Get unique list of pokemon stack from csv
 
-        // for (String line : pokemonList) {
         for (String line : pokemonSet) {
             String[] oneStack = line.split(",");
-            // Set<String> oneStackSet = new HashSet<>(Arrays.asList(oneStack));
 
-            // for (String string : oneStackSet) {
             for (String string : oneStack) {
                 allStacksPokemon.add(string);
             }
